@@ -2,7 +2,7 @@ import { Phone, Mail, Truck, Gift, User, LogOut } from "lucide-react";
 
 export default function TopBar() {
   return (
-    <div className="w-full  py-3 px-4 border-b border-gray-200">
+    <div className="w-full hidden lg:block  py-3 px-4 border-b border-gray-200">
       <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center text-[13px] text-gray-600">
         
         {/* الجزء الشمال: العروض */}
