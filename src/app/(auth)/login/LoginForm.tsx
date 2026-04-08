@@ -18,7 +18,7 @@ import Link from "next/link";
 export default function LoginForm() {
   const router = useRouter();
 
-  const { handleSubmit, control } = useForm({
+  const { handleSubmit, control ,formState: {isSubmitting}} = useForm({
     defaultValues: {
       email: "",
       password: "",
@@ -27,16 +27,20 @@ export default function LoginForm() {
   });
 
   async function handLogin(data: LoginData) {
-    // location.href="/"
-    toast.promise(signIn("credentials", { ...data, redirect: false }), {
-      loading: "login....",
-      success: function () {
-        location.href = "/";
-        return "Welcome";
-      },
-      error: "Incorrect Email or Password",
-    });
+  // 1. استخدام await هنا ضروري عشان isSubmitting تشتغل صح
+  const result = await signIn("credentials", { 
+    ...data, 
+    redirect: false 
+  });
+
+  if (result?.error) {
+    toast.error("Incorrect Email or Password");
+  } else {
+    toast.success("Welcome back!");
+    window.location.href = "/";
+    await new Promise((resolve) => setTimeout(resolve, 1000));
   }
+}
   return (
   <>
   <form onSubmit={handleSubmit(handLogin)}>
@@ -89,10 +93,10 @@ export default function LoginForm() {
 
       <AppButton
         type="submit"
+        disabled={isSubmitting}
         className="w-full p-6 mt-3 font-semibold text-[18px] bg-main-color hover:bg-green-700"
       >
-        <User />
-        Sign In
+        {isSubmitting ? "Loading..." : <><User className="mr-2" /> Sign In</>}
       </AppButton>
 
       
