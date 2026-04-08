@@ -38,7 +38,7 @@ export default function RegisterForm() {
         {...field}
         id={field.name}
         aria-invalid={fieldState.invalid}
-        placeholder="Login button not working on mobile"
+        placeholder="Ali"
         autoComplete="off"
         className=" p-5 focus-visible:ring-main-color focus-visible:ring-1"
         type="text"
@@ -58,7 +58,7 @@ export default function RegisterForm() {
         {...field}
         id={field.name}
         aria-invalid={fieldState.invalid}
-        placeholder="Login button not working on mobile"
+        placeholder="ali@example.com"
         autoComplete="off"
         className=" p-5 focus-visible:ring-main-color focus-visible:ring-1"
         type="email"
@@ -78,7 +78,7 @@ export default function RegisterForm() {
         {...field}
         id={field.name}
         aria-invalid={fieldState.invalid}
-        placeholder="Login button not working on mobile"
+        placeholder="create a strong password"
         autoComplete="new-password"
         className=" p-5 focus-visible:ring-main-color focus-visible:ring-1"
         type="password"
@@ -98,7 +98,7 @@ export default function RegisterForm() {
         {...field}
         id={field.name}
         aria-invalid={fieldState.invalid}
-        placeholder="Login button not working on mobile"
+        placeholder="confirm your password"
         autoComplete="off"
         className=" p-5 focus-visible:ring-main-color focus-visible:ring-1"
         type="password"
@@ -118,7 +118,7 @@ export default function RegisterForm() {
         {...field}
         id={field.name}
         aria-invalid={fieldState.invalid}
-        placeholder="Login button not working on mobile"
+        placeholder="+12345678900"
         autoComplete="off"
         className=" p-5 focus-visible:ring-main-color focus-visible:ring-1"
         type="tel"

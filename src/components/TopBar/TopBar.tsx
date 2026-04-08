@@ -31,7 +31,7 @@ export default function TopBar() {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1">
               <User className="w-4 h-4" />
-              <span>Tana Morris</span>
+              <span></span>
             </div>
             <button className="flex items-center gap-1 hover:text-red-500">
               <LogOut className="w-4 h-4" /> Sign Out

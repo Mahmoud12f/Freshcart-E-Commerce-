@@ -9,6 +9,7 @@ import AppButton from "../shared/AppButton/AppButton";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import Link from "next/link";
 
 // تعريف شكل البيانات
 interface SlideData {
@@ -56,7 +57,7 @@ export default function Slider({ imageList, spaceBetween = 0, slidesPerView = 1 
       >
         {imageList.map((slide, index) => (
           <SwiperSlide key={index}>
-            {/* استبدلت h-400px بـ h-[400px] لأنها الطريقة الصحيحة في Tailwind */}
+           
             <div className="relative h-[400px] w-full">
               {/* الصورة */}
               <div className="h-full w-full relative">
@@ -69,10 +70,10 @@ export default function Slider({ imageList, spaceBetween = 0, slidesPerView = 1 
                 />
               </div>
 
-              {/* طبقة اللون الأخضر (Overlay) */}
+             
               <div className="bg-main-color absolute inset-0 opacity-70"></div>
 
-              {/* المحتوى النصي */}
+              
               <div className="absolute inset-0 p-10 md:p-20 flex flex-col justify-center z-10">
                 <h2 className="text-white font-bold text-2xl md:text-3xl leading-tight">
                   {slide.title}
@@ -81,9 +82,11 @@ export default function Slider({ imageList, spaceBetween = 0, slidesPerView = 1 
                   {slide.description}
                 </p>
                 <div className="mt-8 gap-5 flex">
+                 <Link href={'/shop'}>
                   <AppButton className="bg-white text-[18px] font-semibold text-main-color px-8 py-3 rounded-lg hover:bg-white shadow-md border-none">
                     {slide.button1}
                   </AppButton>
+                 </Link>
                   <AppButton className="bg-transparent text-white border-2 border-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition-all">
                     {slide.button2}
                   </AppButton>

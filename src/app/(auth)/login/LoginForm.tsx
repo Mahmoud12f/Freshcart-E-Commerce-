@@ -4,7 +4,7 @@ import AppButton from "@/components/shared/AppButton/AppButton";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link, User } from "lucide-react";
+import {  Mail, User } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import { schemaLogin } from "./loginSchema";
 import { handleLogin } from "./login.services";
@@ -12,14 +12,13 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { LoginData } from "./loginFormShap";
+import Link from "next/link";
 
 
 export default function LoginForm() {
+  const router = useRouter();
 
-
-  const router = useRouter()
-
-  const { handleSubmit, control } = useForm ({
+  const { handleSubmit, control } = useForm({
     defaultValues: {
       email: "",
       password: "",
@@ -27,23 +26,20 @@ export default function LoginForm() {
     resolver: zodResolver(schemaLogin),
   });
 
- async function handLogin(data:LoginData) {
-
-  
-  // location.href="/"
-    toast.promise(signIn("credentials" , {...data, redirect: false}), {
-
+  async function handLogin(data: LoginData) {
+    // location.href="/"
+    toast.promise(signIn("credentials", { ...data, redirect: false }), {
       loading: "login....",
       success: function () {
-       location.href = "/"
+        location.href = "/";
         return "Welcome";
       },
-      error:  "Incorrect Email or Password"
-     
+      error: "Incorrect Email or Password",
     });
   }
   return (
-    <form onSubmit={handleSubmit(handLogin)}>
+  <>
+  <form onSubmit={handleSubmit(handLogin)}>
       {/* email */}
       <Controller
         name="email"
@@ -55,9 +51,9 @@ export default function LoginForm() {
               {...field}
               id={field.name}
               aria-invalid={fieldState.invalid}
-              placeholder="Login button not working on mobile"
+              placeholder="Enter your email"
               autoComplete="off"
-              className=" p-5 focus-visible:ring-main-color focus-visible:ring-1"
+              className=" p-6 focus-visible:ring-main-color focus-visible:ring-1"
               type="email"
             />
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
@@ -75,9 +71,9 @@ export default function LoginForm() {
               {...field}
               id={field.name}
               aria-invalid={fieldState.invalid}
-              placeholder="Login button not working on mobile"
+              placeholder="Enter your password"
               autoComplete="new-password"
-              className=" p-5 focus-visible:ring-main-color focus-visible:ring-1"
+              className=" p-6 focus-visible:ring-main-color focus-visible:ring-1"
               type="password"
             />
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
@@ -85,24 +81,31 @@ export default function LoginForm() {
         )}
       />
 
-      <div className="flex justify-center mb-5">
-        <p>
-          Already Have Accout?{" "}
-          <Link
-            href="/login"
-            className=" text-main-color hover:underline font-semibold"
-          >
-            Sign In
-          </Link>
-        </p>
+      <div className="flex items-center gap-3">
+        <Input type="checkbox" className="w-fit" />
+
+        <span>Keep me signed in</span>
       </div>
+
       <AppButton
         type="submit"
-        className="w-full p-5 font-semibold text-[18px] bg-main-color hover:bg-green-700"
+        className="w-full p-6 mt-3 font-semibold text-[18px] bg-main-color hover:bg-green-700"
       >
         <User />
-        Login
+        Sign In
       </AppButton>
-    </form>
+
+      
+    </form>  
+
+   <div className="flex gap-3 justify-center mt-5">
+        <p>New to FreshCart?</p>
+        <Link href="/register" className="text-main-color font-bold">
+        Create an account
+        </Link>
+      </div>
+  </>
+
+   
   );
 }
